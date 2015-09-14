@@ -1,0 +1,6 @@
+{
+ "argv": ["python3", "<PATH_TO_javakernel>",
+          "-f", "{connection_file}"],
+ "display_name": "Java 9",
+ "language": "java"
+}
