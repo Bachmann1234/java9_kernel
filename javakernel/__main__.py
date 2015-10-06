@@ -78,6 +78,7 @@ class JavaKernel(KernelBase):
             self._start_java_repl()
 
         if not silent:
+            output = '\n'.join(output.split('\n')[1:])
             stream_content = {'name': 'stdout', 'text': output}
             self.send_response(self.iopub_socket, 'stream', stream_content)
 
