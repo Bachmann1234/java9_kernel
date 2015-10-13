@@ -1,14 +1,14 @@
 from subprocess import check_output
 import signal
 try:
-    from ipykernel.ipkernel import KernelBase
+    from ipykernel.ipkernel import Kernel
 except ImportError:
     from IPython.kernel.zmq.kernelbase import Kernel
 import os
 from pexpect import replwrap, EOF
 
 
-class JavaKernel(KernelBase):
+class JavaKernel(Kernel):
     implementation = 'java_kernel'
     implementation_version = 0.1
     langauge = "java"
