@@ -5,7 +5,7 @@ An ipython kernel for java 9
 This is an experimental ipython kernel written with an experimental repl written for
 a unreleased java version. Don't expect this to be production ready.
 
-That being said. File issues and ill do my best.
+That being said. File issues and I'll do my best.
 
 ##Requirements
 
@@ -17,10 +17,10 @@ Find or build yourself a kulla.jar
 
 [This link has a link to the jar](http://mythoughtsjdk.blogspot.com/2015/04/playing-with-java-9-and-repl-ljc-oracle.html)
 
-This kernel expects two environment variables defined
+This kernel expects two environment variables defined, which can be set in the kernel.json (described below):
 
 ```
-KULLA_HOME - The locaiton of kulla.jar
+KULLA_HOME - The full path of kulla.jar
 
 JAVA_9_HOME - like JAVA_HOME but pointing to a java 9 environment
 ```
@@ -37,7 +37,7 @@ mkdir ~/.ipython/kernels/java/
 cp <location of your edited kernel.json> ~/.ipython/kernels/java/
 ```
 
-For example my kernel.json looks like this
+For example a kernel.json might look like this:
 
 ```
 {
@@ -45,10 +45,14 @@ For example my kernel.json looks like this
           "-f", "{connection_file}"],
  "display_name": "Java 9",
  "language": "java"
-}
+ "env" : {
+     "JAVA_9_HOME": "/Users/bachmann/Code/jdk1.9.0",
+     "KULLA_HOME": "/Users/bachmann/Code/kulla.jar"
+     }
+ }       
 ```
 
-If all worked you should be able to run the kernel
+If all worked you should be able to run the kernel:
 
 ```
  ipython console --kernel java
@@ -64,6 +68,6 @@ In [1]: System.out.println("OMG")
 OMG
 ```
 
-It should work in a notebook as well
+It should work in a notebook as well:
 
 ![Notebook Screenshot](notebook.png?raw=true)
