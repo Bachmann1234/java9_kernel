@@ -109,7 +109,7 @@ class JavaKernel(Kernel):
             return None
 
         interrupted, output = self._execute_java(code)
-        exitcode = "|  Error: " in output
+        exitcode = "|  Error:" in output
 
         # Look for a return value:
         retval = None
