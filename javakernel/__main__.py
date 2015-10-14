@@ -1,10 +1,16 @@
 from subprocess import check_output
 import signal
+metakernel = False
 try:
-    from ipykernel.ipkernel import Kernel
-except ImportError:
-    from IPython.kernel.zmq.kernelbase import Kernel
+    from metakernel import MetaKernel as Kernel
+    metakernel = True
+except:
+    try:
+        from ipykernel.kernelbase import Kernel
+    except ImportError:
+        from IPython.kernel.zmq.kernelbase import Kernel
 import os
+import re
 from pexpect import replwrap, EOF
 
 
@@ -45,6 +51,7 @@ class JavaKernel(Kernel):
         finally:
             signal.signal(signal.SIGINT, sig)
 
+
     def do_execute(self, code, silent, store_history=True, user_expressions=None, allow_stdin=False):
         """
         :param code:
@@ -61,10 +68,18 @@ class JavaKernel(Kernel):
         :return:
             dict https://ipython.org/ipython-doc/dev/development/messaging.html#execution-results
         """
-        if not code.strip():
-            return {'status': 'ok', 'execution_count': self.execution_count,
-                    'payload': [], 'user_expressions': {}}
+        if metakernel:
+            return super(JavaKernel, self).do_execute(code, silent, store_history, user_expressions, allow_stdin)
+        else:
+            return self._do_execute(code, silent)
 
+    def _execute_java(self, code):
+        """
+        :param code:
+            The code to be executed.
+        :return:
+            interrupted and output
+        """
         interrupted = False
         try:
             output = self.javawrapper.run_command(code.rstrip(), timeout=None)
@@ -76,6 +91,63 @@ class JavaKernel(Kernel):
         except EOF:
             output = self.javawrapper.child.before + 'Restarting java'
             self._start_java_repl()
+        return interrupted, output
+
+
+    def do_execute_direct(self, code, silent=False):
+        """
+        :param code:
+            The code to be executed.
+        :param silent:
+            Whether to display output.
+        :return:
+            Return value, or None
+
+        MetaKernel code handler.
+        """
+        if not code.strip():
+            return None
+
+        interrupted, output = self._execute_java(code)
+        exitcode = "|  Error: " in output
+
+        # Look for a return value:
+        retval = None
+        for expr in [".*\|  Expression value is: ([^\n]*)", 
+                     ".*\|  Variable [^\n]* of type [^\n]* has value ([^\n]*)"]:
+            match = re.match(expr, output, re.MULTILINE | re.DOTALL)
+            if match:
+                sretval = match.groups()[0]
+                try:
+                    # Turn string into a Python value:
+                    retval = eval(sretval)
+                except:
+                    retval = sretval
+                break
+
+        if not silent:
+            if exitcode:
+                self.Error(output)
+            else:
+                print(output)
+        return retval
+
+    def _do_execute(self, code, silent):
+        """
+        :param code:
+            The code to be executed.
+        :param silent:
+            Whether to display output.
+        :return:
+            Return value, or None
+
+        Non-metakernel code handler. Need to construct all messages.
+        """
+        if not code.strip():
+            return {'status': 'ok', 'execution_count': self.execution_count,
+                    'payload': [], 'user_expressions': {}}
+
+        interrupted, output = self._execute_java(code)
 
         if not silent:
             stream_content = {'name': 'stdout', 'text': output}
@@ -95,5 +167,8 @@ class JavaKernel(Kernel):
 
 
 if __name__ == '__main__':
-    from ipykernel.kernelapp import IPKernelApp
+    try:
+        from ipykernel.kernelapp import IPKernelApp
+    except:
+        from IPython.kernel.zmq.kernelapp import IPKernelApp
     IPKernelApp.launch_instance(kernel_class=JavaKernel)
