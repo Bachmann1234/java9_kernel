@@ -29,6 +29,8 @@ class JavaKernel(Kernel):
     def __init__(self, **kwargs):
         super(JavaKernel, self).__init__(**kwargs)
         self._banner = None
+        self.env = {"JAVA_9_HOME": os.environ['JAVA_9_HOME'],
+                    "KULLA_HOME": os.environ['KULLA_HOME']}
         self._start_java_repl()
 
     @property
