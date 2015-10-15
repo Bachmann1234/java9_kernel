@@ -48,7 +48,8 @@ class JavaKernel(Kernel):
                     self._KULLA_LOCATION
                 ),
                 u'->',
-                None
+                None,
+                continuation_prompt=u'>>'
             )
         finally:
             signal.signal(signal.SIGINT, sig)
