@@ -169,3 +169,30 @@ class JavaKernel(Kernel):
                     'payload': [], 'user_expressions': {}}
 
 
+    def get_completions(self, info):
+        """
+        Get command-line completions (TAB) from JShell:
+
+        /vars
+        |    Test test = Test@1c2c22f3
+        
+        /methods
+        |    printf (Ljava/lang/String;[Ljava/lang/Object;)V
+        |    draw ()V
+        
+        /classes
+        |    class Test
+
+        """
+        token = info["help_obj"]
+        matches = []
+        for command, parts, part, text in [("/vars", 3, 1, ""),
+                                           ("/methods", 2, 0, "()"),
+                                           ("/classes", 2, 1, "()")]:
+            interrupt, output = self._execute_java(command)
+            for line in output.split("\n"):
+                if len(line) > 1 and line[0] == "|":
+                    items = line[1:].strip().split(" ", parts)
+                    if items[part].startswith(token):
+                        matches.append(items[part] + text)
+        return matches
