@@ -159,7 +159,7 @@ class JavaKernel(Kernel):
         if interrupted:
             return {'status': 'abort', 'execution_count': self.execution_count}
 
-        exitcode = "|  Error: " in output
+        exitcode = "|  Error:" in output
 
         if exitcode:
             return {'status': 'error', 'execution_count': self.execution_count,
