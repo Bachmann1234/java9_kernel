@@ -44,7 +44,7 @@ For example a kernel.json might look like this:
  "argv": ["python3", "/Users/bachmann/Code/java9_kernel/javakernel",
           "-f", "{connection_file}"],
  "display_name": "Java 9",
- "language": "java"
+ "language": "java",
  "env" : {
      "JAVA_9_HOME": "/Users/bachmann/Code/jdk1.9.0",
      "KULLA_HOME": "/Users/bachmann/Code/kulla.jar"
