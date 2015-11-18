@@ -71,3 +71,9 @@ OMG
 It should work in a notebook as well:
 
 ![Notebook Screenshot](notebook.png?raw=true)
+
+Troubleshooting:
+
+Ensure the Kulla Jar is executable otherwise nothing will work.
+
+If you are having issues saying things like "Module not found" or anything that suggests a dependency has not been installed and you are sure it *is* installed. Try verifying your python version. The example kernel in this readme is setup for python3. If you copy and paste it ensure you have your environment setup for python 3. Otherwise just update the kernel.json to point to whatever python environment you have setup.
