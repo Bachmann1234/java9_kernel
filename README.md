@@ -11,11 +11,7 @@ That being said. File issues and I'll do my best.
 
 Install [java9](http://www.oracle.com/technetwork/articles/java/ea-jsp-142245.html)
 
-Find or build yourself a kulla.jar 
-
-[Out of date build guide](http://www.jclarity.com/2015/04/15/java-9-repl-getting-started-guide/)
-
-[This link has a link to the jar](http://mythoughtsjdk.blogspot.com/2015/04/playing-with-java-9-and-repl-ljc-oracle.html)
+Download a [kulla.jar](https://github.com/AdoptOpenJDK/adoptopenjdk-getting-started-kit/blob/master/en/openjdk-projects/kulla/kulla.md)
 
 This kernel expects two environment variables defined, which can be set in the kernel.json (described below):
 
