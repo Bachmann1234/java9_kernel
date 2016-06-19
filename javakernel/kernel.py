@@ -47,9 +47,9 @@ class JavaKernel(Kernel):
                     self._JAVA_COMMAND,
                     self._KULLA_LOCATION
                 ),
-                u'->',
+                u'jshell> ',
                 None,
-                continuation_prompt=u'>>'
+                continuation_prompt=u'   ...> '
             )
         finally:
             signal.signal(signal.SIGINT, sig)
