@@ -1,0 +1,3 @@
+VER=3
+docker rm -vf "j$VER"
+docker run -d --name "j$VER" -p 18888:8888 "jup/java:$VER"
