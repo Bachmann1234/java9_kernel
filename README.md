@@ -1,5 +1,5 @@
-# java9_kernel (broken)
-An ipython kernel for java 9. Recent releases of the kulla.jar do not seem to work as expected. I have tried to get it working but after several hours have failed. https://github.com/Bachmann1234/java9_kernel/issues/20
+# java9_kernel
+An ipython kernel for java 9. Last tested Kulla.jar was kulla--20160821005845.jar
 
 ## Expectation Setting
 This is an experimental ipython kernel written with an experimental repl written for
