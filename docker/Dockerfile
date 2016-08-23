@@ -5,7 +5,7 @@ RUN wget -nc --quiet \
   tar -xf jdk-9.tgz && \
   rm -f jdk-9.tgz
 
-COPY 'docker/kulla--20160821005845.jar'  /home/jovyan/work/kulla.jar
+COPY 'docker/kulla.jar'  /home/jovyan/work/kulla.jar
 RUN pip install --quiet jupyter
 
 RUN mkdir /home/jovyan/work/javakernel

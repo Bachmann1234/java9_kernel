@@ -8,6 +8,10 @@ It just brings a lot of not relevant stuff inherited from "jupyter/base-notebook
 "docker build" will fail because of the relative path to javakernel folder
 
 ### To build docker image
+First Download a [kulla.jar](https://github.com/AdoptOpenJDK/adoptopenjdk-getting-started-kit/blob/master/en/openjdk-projects/kulla/kulla.md)
+
+Rename it to kulla.jar and place it in the root of this project. The last tested jar was. kulla--20160821005845.jar
+
 from docker directory run
 
 ```
