@@ -1,0 +1,5 @@
+VER=3
+cd ..
+docker build -f docker/Dockerfile -t "jup/java:$VER" .
+cd -
+

@@ -1,0 +1,10 @@
+{
+ "argv": ["python3", "/home/jovyan/work/javakernel", "-f", "{connection_file}"],
+ "display_name": "Java 9",
+ "language": "java",
+ "env" : {
+     "JAVA_9_HOME": "/home/jovyan/work/jdk-9",
+     "KULLA_HOME": "/home/jovyan/work/kulla.jar"
+     }
+}
+
