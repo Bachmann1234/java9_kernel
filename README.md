@@ -1,3 +1,5 @@
+# The kernel as of now is not working. Unclear on why.
+
 # java9_kernel
 An ipython kernel for java 9. Last tested Kulla.jar was kulla--20160821005845.jar
 
