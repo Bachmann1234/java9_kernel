@@ -9,7 +9,7 @@ a unreleased java version. Don't expect this to be production ready.
 
 That being said. File issues and I'll do my best.
 
-##Requirements
+## Requirements
 
 Install [java9](http://www.oracle.com/technetwork/articles/java/ea-jsp-142245.html)
 
@@ -23,7 +23,7 @@ KULLA_HOME - The full path of kulla.jar
 JAVA_9_HOME - like JAVA_HOME but pointing to a java 9 environment
 ```
 
-##Installing the kernel
+## Installing the kernel
 
 Assuming you have cloned the repo and got all the requirements above setup
 
